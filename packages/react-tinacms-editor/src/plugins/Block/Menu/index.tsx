@@ -16,5 +16,13 @@ limitations under the License.
 
 */
 
-export { MenuItem } from './MenuItem'
-export { MarkdownMenuItem } from './MarkdownMenuItem'
+import * as React from 'react'
+
+import { useEditorModeContext } from '../../../context/editorMode'
+import { MenuItem } from './MenuItem'
+import { MarkdownMenuItem } from './MarkdownMenuItem'
+
+export const Menu = () => {
+  const { mode } = useEditorModeContext()
+  return mode === 'wysiwyg' ? <MenuItem /> : <MarkdownMenuItem />
+}

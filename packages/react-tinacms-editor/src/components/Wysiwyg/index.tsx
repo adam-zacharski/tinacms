@@ -20,13 +20,16 @@ import * as React from 'react'
 import { useState } from 'react'
 
 import { EditorModeMenu } from '../EditorModeMenu'
+import { EditorModeProvider } from '../../context/editorMode'
 import { EditorProps } from '../../types'
 import { MarkdownEditor } from '../MarkdownEditor'
 import { ProsemirrorEditor } from '../ProsemirrorEditor'
 
 const modeTogglePlugin = (setMode: (mode: string) => void) => ({
   name: 'wysiwygModeToggle',
-  MenuItem: () => <EditorModeMenu toggleEditorMode={() => setMode('raw')} />,
+  MenuItem: () => (
+    <EditorModeMenu toggleEditorMode={() => setMode('markdown')} />
+  ),
 })
 
 export const Wysiwyg = ({
@@ -48,8 +51,8 @@ export const Wysiwyg = ({
     format === 'markdown' ? [...plugins, modeTogglePlugin(setMode)] : plugins
 
   return (
-    <>
-      {mode === 'raw' ? (
+    <EditorModeProvider mode={mode}>
+      {mode === 'markdown' ? (
         <MarkdownEditor
           value={value}
           onChange={handleChange}
@@ -68,6 +71,6 @@ export const Wysiwyg = ({
           imageProps={imageProps}
         />
       )}
-    </>
+    </EditorModeProvider>
   )
 }

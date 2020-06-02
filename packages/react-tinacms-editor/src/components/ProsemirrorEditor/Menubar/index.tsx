@@ -20,7 +20,7 @@ import React from 'react'
 import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 
 import { TablePopups } from '../../../plugins/Table/Popup'
-import { MenuItem as BlockMenu } from '../../../plugins/Block'
+import { Menu as BlockMenu } from '../../../plugins/Block'
 import { MenuItem as CodeBlockMenu } from '../../../plugins/CodeBlock'
 import { MenuItem as HistoryMenu } from '../../../plugins/History'
 import { MenuItem as InlineMenu } from '../../../plugins/Inline'

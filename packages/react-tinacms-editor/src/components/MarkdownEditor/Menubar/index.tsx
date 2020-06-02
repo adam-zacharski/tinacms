@@ -18,7 +18,7 @@ limitations under the License.
 
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 
-import { MarkdownMenuItem as BlockMenu } from '../../../plugins/Block'
+import { Menu as BlockMenu } from '../../../plugins/Block'
 import { MarkdownMenuItem as InlineMenu } from '../../../plugins/Inline'
 import { MarkdownMenuItem as LinkMenu } from '../../../plugins/Link'
 import { MarkdownMenuItem as ImageMenu } from '../../../plugins/Image'
@@ -28,6 +28,7 @@ import { MarkdownMenuItem as CodeBlockMenu } from '../../../plugins/CodeBlock'
 import { MarkdownMenuItem as ListMenu } from '../../../plugins/List'
 import { MarkdownMenuItem as HistoryMenu } from '../../../plugins/History'
 import { MenuPortalProvider } from '../../../context/MenuPortal'
+import { useEditorModeContext } from '../../../context/editorMode'
 import { ImageProps } from '../../../types'
 import {
   MenuPlaceholder,
@@ -52,6 +53,8 @@ export const Menubar = ({
   const menuRef = useRef<HTMLDivElement>(null)
   const [menuBoundingBox, setMenuBoundingBox] = useState<any>(null)
   const menuFixedTopOffset = typeof sticky === 'string' ? sticky : '0'
+  const { mode } = useEditorModeContext()
+  console.log('mode = ', mode)
 
   useEffect(() => {
     if (menuRef.current && sticky) {

@@ -17,14 +17,22 @@ limitations under the License.
 */
 
 import * as React from 'react'
-import { FunctionComponent } from 'react'
+import { createContext, useContext } from 'react'
 
-import { HeadingIcon } from '@tinacms/icons'
+const EditorModeContext = createContext<{
+  mode: string
+}>({
+  mode: 'wysiwyg',
+})
 
-import { MenuButton } from '../../../components/MenuHelpers'
-
-export const MarkdownMenuItem: FunctionComponent = () => (
-  <MenuButton data-tooltip="Heading" disabled>
-    <HeadingIcon />
-  </MenuButton>
+export const EditorModeProvider = ({ children, mode }: any) => (
+  <EditorModeContext.Provider value={{ mode }}>
+    {children}
+  </EditorModeContext.Provider>
 )
+
+export const EditorModeConsumer = EditorModeContext.Consumer
+
+export const useEditorModeContext = () => ({
+  ...useContext(EditorModeContext),
+})
